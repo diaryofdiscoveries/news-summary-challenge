@@ -4,23 +4,22 @@ var test = function() {
     var textField = document.getElementById('textField');
     var testResult = document.getElementById('testResult');
     var main = document.getElementById("main");
-    var getNews = document.getElementById("getNews");
+    var refreshNews = document.getElementById("refreshNews");
     var articleList = document.getElementById("articleList");
     var articleListItems = document.getElementById("articleList").getElementsByTagName("li");
     var tenMoreButton = document.getElementById("tenMore");
+    var summaryButton = document.getElementById("summaryButton");
+    var increment = 3;
 
     var success = function () {
         console.log("%cTest passed", 'color:green');
-        // testResult.insertAdjacentHTML("beforeend", '<li style="color: green"> Test passed! </li>');
     };
 
     var fail = function (method) {
         console.log("%c" + method, 'color:red');
-        // testResult.insertAdjacentHTML("beforeend", '<li style="color: red"> Test failed! </li>');
     };
 
     var reset = function() {
-        // blogList.innerHTML = ''
     };
 
     var testIfTrue = function(argument) {
@@ -50,14 +49,23 @@ var test = function() {
         testIfTrue(articleListItems[0].innerHTML.includes('<a href='));
     };
 
-    var linkGoesToGuardian = function() {
+    var linkGoesToGuardianSite = function() {
         testIfTrue(articleListItems[0].innerHTML.includes('<a href="https://www.theguardian.com/'));
     };
 
     var clickTenMore = function() {
         testIfTrue(articleListItems.length === 10);
-        fiveMoreButton.click();
+        tenMoreButton.click();
+        articleListItems = document.getElementById("articleList").getElementsByTagName("li");
         testIfTrue(articleListItems.length === 20);
+    };
+
+    var summaryButtonExits = function() {
+        testIfTrue(summaryButton);
+    };
+
+    var getNewsSummary = function() {
+        summaryButton.click();
     };
 
     runTests = function() {
@@ -65,12 +73,12 @@ var test = function() {
         hasANewsfeedButton();
         newsFeedHasTopTenItems();
         eachItemIsAList();
-        linkGoesToGuardian();
-        clickTenMore()
+        linkGoesToGuardianSite();
+        clickTenMore();
+        summaryButtonExits();
     };
 
-
-    runTests()
+    runTests();
 
 };
 
